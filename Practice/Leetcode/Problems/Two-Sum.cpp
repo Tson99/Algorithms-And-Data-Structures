@@ -1,3 +1,4 @@
+//Link: https://leetcode.com/problems/two-sum/
 #include<bits/stdc++.h>
 using namespace std;
  
@@ -33,19 +34,38 @@ const ll maxN = 1e5;
 const ll INF = 1e18;
 const ld EPS = 1e-9;
  
-bool cmp(pair<int,int> a, pair<int,int> b){
-    // if (a.F == b.F)
-    //     return a.S <= b.S;
-    if (a.F == b.F)
-        return a.S <= b.S;
-} 
+ 
+bool cmp(int a, int b){
+    return a > b;
+}
+
+class Solution {
+public:
+    vector<int> twoSum(vector<int>& nums, int target) {
+        vector<int> result;
+        vector<pair<int, int>> v;
+        for (int i = 0; i < nums.size(); i++)
+            v.PB(MP(nums[i], i));
+        sort(v.begin(), v.end());
+        vector<pair<int, int>>::iterator low;
+        for (int i = 0; i < v.size(); i++){
+            low = lower_bound(v.begin()+i+1, v.end(), MP(target - v[i].F, -1));
+            int pos = low - v.begin();
+            if ((low != v.end()) && ((*low).F == target - v[i].F)){
+                result = {v[i].S, v[int(low - v.begin())].S};
+                break;
+            }
+        }
+        return result;
+    }
+};
 
 void process(){
-    vector<pair<int,int>> v = {{3,2}, {2, 3}, {2,1}};
-    sort(v.begin(), v.end(), cmp);
-    for (auto x: v){
-        cout << x.F << " " << x.S << endl;
-    }
+    Solution s;
+    vector<int> nums = {2, 5, 5, 11};
+    int target = 10;
+    for (int x : s.twoSum(nums, target))
+        cout << x << " ";
     return;
 }
 
