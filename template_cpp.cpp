@@ -34,16 +34,11 @@ const ll INF = 1e18;
 const ld EPS = 1e-9;
  
  
-struct cmp{
-    bool operator() (int a, int b) {return }
-};
+bool cmp(int a, int b) {return a > b;}
 
 void process(){
-    priority_queue<int, vector<int>, greater<int>> pq;
-    pq.push(5);
-    pq.push(4);
-    pq.push(6);
-    cout << pq.top();
+    WHATIS(-17%5)
+    return;
 }
 
 int main()
